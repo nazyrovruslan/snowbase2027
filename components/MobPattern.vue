@@ -6,7 +6,7 @@
     @pointermove="onMove"
     @pointerdown="onMove"
     @pointerleave="onLeave"
-    @pointerup="onLeave"
+    @pointerup="onRelease"
     @pointercancel="onLeave"
   >
     <div class="row row-first">
@@ -33,35 +33,67 @@
 </template>
 
 <script setup>
+// Тап по букве: она увеличивается на 100%, соседи сверху/снизу/слева/справа — на 50%.
 const root = ref(null)
-const MAX = 0.85
-const RADIUS = 45 // в px макета 390
-
 let letters = []
-let pointer = null
+let active = null // { row, col }
 let raf = 0
 
+const targetFor = (l) => {
+  if (!active) return 1
+  const d = Math.abs(l.row - active.row) + Math.abs(l.col - active.col)
+  return d === 0 ? 2 : d === 1 ? 1.5 : 1
+}
+
 const tick = () => {
-  const k = root.value.getBoundingClientRect().width / 390
   let moving = false
   for (const l of letters) {
-    let target = 1
-    if (pointer) {
-      const r = l.el.getBoundingClientRect()
-      const d = Math.hypot(r.left + r.width / 2 - pointer.x, r.top + r.height / 2 - pointer.y) / k
-      target = 1 + MAX * Math.exp(-((d / RADIUS) ** 2))
-    }
-    l.s += (target - l.s) * 0.15
-    if (Math.abs(target - l.s) > 0.001) moving = true
+    const t = targetFor(l)
+    l.s += (t - l.s) * 0.2
+    if (Math.abs(t - l.s) > 0.001) moving = true
+    else l.s = t
     l.el.style.transform = `scale(${l.s.toFixed(3)})`
   }
-  raf = moving || pointer ? requestAnimationFrame(tick) : 0
+  raf = moving ? requestAnimationFrame(tick) : 0
 }
 const start = () => { if (!raf) raf = requestAnimationFrame(tick) }
-const onMove = (e) => { pointer = { x: e.clientX, y: e.clientY }; start() }
-const onLeave = () => { pointer = null; start() }
 
-onMounted(() => { letters = [...root.value.querySelectorAll('.u')].map(el => ({ el, s: 1 })) })
+// ближайшая к пальцу буква (в пределах ячейки)
+const pick = (x, y) => {
+  let best = null, bestD = Infinity
+  for (const l of letters) {
+    const r = l.el.parentElement.getBoundingClientRect()
+    const d = Math.hypot(r.left + r.width / 2 - x, r.top + r.height / 2 - y)
+    if (d < bestD) { bestD = d; best = l }
+  }
+  const cell = best?.el.parentElement.getBoundingClientRect()
+  return best && bestD < Math.max(cell.width, cell.height) ? best : null
+}
+const onMove = (e) => {
+  clearTimeout(releaseTimer)
+  const l = pick(e.clientX, e.clientY)
+  const next = l ? { row: l.row, col: l.col } : null
+  if (next?.row !== active?.row || next?.col !== active?.col) { active = next; start() }
+}
+let releaseTimer = 0
+const onLeave = () => { clearTimeout(releaseTimer); active = null; start() }
+// после тапа буквы держатся увеличенными чуть дольше, чтобы эффект был заметен
+const onRelease = () => { clearTimeout(releaseTimer); releaseTimer = setTimeout(onLeave, 700) }
+
+onMounted(() => {
+  const rows = [...root.value.querySelectorAll('.row')]
+  const all = [...root.value.querySelectorAll('.u')]
+  const xs = all.map(el => el.getBoundingClientRect()).map(r => r.left + r.width / 2)
+  const minX = Math.min(...xs), maxX = Math.max(...xs)
+  letters = all.map((el, i) => {
+    const row = rows.indexOf(el.closest('.row'))
+    // в первом ряду 4 буквы справа от логотипа — это колонки 1–4
+    const col = row === 0
+      ? [...rows[0].querySelectorAll('.u')].indexOf(el) + 1
+      : Math.round(((xs[i] - minX) / (maxX - minX)) * 4)
+    return { el, s: 1, row, col }
+  })
+})
 onBeforeUnmount(() => cancelAnimationFrame(raf))
 </script>
 
