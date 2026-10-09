@@ -47,10 +47,10 @@
       @blur="alt = false"
     >Подать заявку</a>
 
-    <div class="abs pill" style="left: 1125px">
+    <div class="abs pill" style="left: 1125px; width: 226px">
       <img src="~/assets/sb/calendar.svg" alt="" width="19" height="16" />25–28 февраля, 2027
     </div>
-    <div class="abs pill" style="left: 1371px">
+    <div class="abs pill" style="left: 1371px; width: 111px">
       <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
     </div>
     </div>
@@ -79,9 +79,9 @@ useAutoplayWhenVisible(preview)
 .hero { position: relative; width: 1920px; height: calc(100dvh / var(--k, 1)); min-height: 860px; overflow: hidden; }
 .mid { left: 0; top: calc((100% - 996px) * 0.5); width: 1920px; height: 996px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease, transform 1.4s ease; }
-.photo-alt { object-fit: cover; opacity: 0; transform: scale(1.03); }
-.alt .photo-alt { opacity: 1; transform: scale(1); }
+.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease; }
+.photo-alt { opacity: 0; }
+.alt .photo-alt { opacity: 1; }
 
 .logo { left: 40px; top: 33px; width: 202px; height: 44px; }
 .menu { top: 46px; font-size: 14px; }

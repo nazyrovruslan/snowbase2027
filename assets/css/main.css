@@ -19,12 +19,14 @@ a { color: inherit; text-decoration: none; }
 
 /* «уголки» вокруг кнопок Связаться / Telegram */
 .corners { position: relative; display: inline-flex; align-items: center; justify-content: center; }
-.corners > i { position: absolute; width: 10px; height: 10px; border: 0 solid currentColor; transition: all .25s ease; }
-.corners > i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
-.corners > i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
-.corners > i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
-.corners > i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
-.corners:hover > i { width: 50%; height: 50%; }
+/* плечи 15px со скруглением 10px, как в Figma */
+.corners > i { position: absolute; width: 15px; height: 15px; border: 0 solid currentColor; }
+.corners > i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; border-top-left-radius: 10px; }
+.corners > i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; border-top-right-radius: 10px; }
+.corners > i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; border-bottom-left-radius: 10px; }
+.corners > i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; border-bottom-right-radius: 10px; }
+.corners { transition: opacity .2s ease; }
+.corners:hover { opacity: .6; }
 
 /* кнопка с «скобками» как base-button_black на southhub.ru */
 .base-button {

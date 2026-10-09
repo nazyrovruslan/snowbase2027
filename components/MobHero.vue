@@ -1,6 +1,6 @@
 <template>
   <section ref="hero" class="hero" :class="{ alt }">
-    <img class="abs photo" src="~/assets/mob/hero.jpg" alt="" />
+    <img class="abs photo" src="~/assets/sb/hero.jpg" alt="" />
     <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
     <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
@@ -35,10 +35,10 @@
       target="_blank"
     >Подать заявку</a>
 
-    <div class="abs pill" style="left: 34px">
+    <div class="abs pill" style="left: 34px; width: 202px">
       <img src="~/assets/mob/calendar.svg" alt="" width="16" height="13" />25–28 февраля, 2027
     </div>
-    <div class="abs pill" style="left: 256px">
+    <div class="abs pill" style="left: 256px; width: 100px">
       <img src="~/assets/mob/pin.svg" alt="" width="13" height="16" />Aрхыз
     </div>
     </div>
@@ -57,7 +57,7 @@
     <!-- меню -->
     <Transition name="fade">
       <div v-if="menu" class="menu">
-        <img class="abs photo" src="~/assets/mob/hero.jpg" alt="" />
+        <img class="abs photo" src="~/assets/sb/hero.jpg" alt="" />
         <div class="abs menu-bg" />
         <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
         <button class="abs close" aria-label="Закрыть меню" @click="menu = false">
@@ -107,9 +107,9 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 .hero { position: relative; width: 390px; height: calc(100dvh / var(--km, 1)); min-height: 712px; overflow: hidden; }
 .mid { left: 0; top: calc((100% - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease, transform 1.4s ease; }
-.photo-alt { object-fit: cover; opacity: 0; transform: scale(1.03); }
-.alt .photo-alt { opacity: 1; transform: scale(1); }
+.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 15% bottom; transition: opacity .7s ease; }
+.photo-alt { opacity: 0; }
+.alt .photo-alt { opacity: 1; }
 
 .logo { left: 16px; top: 60px; width: 171px; height: 37px; }
 .burger, .close { background: none; border: 0; padding: 0; cursor: pointer; }
