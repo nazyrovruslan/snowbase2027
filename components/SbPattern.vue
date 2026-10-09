@@ -2,23 +2,23 @@
   <!-- блок с буквами U, как на southhub.ru: буквы увеличиваются возле курсора -->
   <section ref="root" class="u-block" @mousemove="onMove" @mouseleave="onLeave">
     <div class="row row-0">
-      <div class="logo-cell"><img src="/sh/animate-u-block-logo.svg" alt="South HUB" height="21" /></div>
-      <div v-for="i in 15" :key="i" class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div class="logo-cell"><img src="~/assets/sh/animate-u-block-logo.svg" alt="South HUB" height="21" /></div>
+      <div v-for="i in 15" :key="i" class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
     </div>
     <div class="row">
-      <div v-for="i in 16" :key="i" class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div v-for="i in 16" :key="i" class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
     </div>
     <div class="row">
-      <div v-for="i in 11" :key="i" class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div v-for="i in 11" :key="i" class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
       <div class="cell text-cell">масштаб идей, людей и теплых связей</div>
-      <div class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
     </div>
     <div class="row">
-      <div v-for="i in 16" :key="i" class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div v-for="i in 16" :key="i" class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
     </div>
     <div class="row">
-      <div v-for="i in 15" :key="i" class="cell"><img class="u" src="/sh/animate-u.svg" alt="" width="20" height="21" /></div>
-      <div class="cell"><img class="u" src="/sh/animate-b.svg" alt="" width="20" height="21" /></div>
+      <div v-for="i in 15" :key="i" class="cell"><img class="u" src="~/assets/sh/animate-u.svg" alt="" width="20" height="21" /></div>
+      <div class="cell"><img class="u" src="~/assets/sh/animate-b.svg" alt="" width="20" height="21" /></div>
     </div>
   </section>
 </template>

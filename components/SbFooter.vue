@@ -3,7 +3,7 @@
   <div class="footer-area">
     <div class="about">
       <a href="https://median.agency" target="_blank" class="about-logo">
-        <img src="/sh/median-logo.png" alt="median.agency" width="201" height="87" />
+        <img src="~/assets/sh/median-logo.png" alt="median.agency" width="201" height="87" />
       </a>
       <span class="about-line" />
       <div class="about-btn-wrap">
@@ -15,7 +15,7 @@
     <footer class="footer">
       <div class="footer-line" />
       <div class="footer-info">
-        <a href="https://southhub.ru/" target="_blank"><img src="/sh/footer-logo-black.svg" alt="South HUB" class="footer-logo" /></a>
+        <a href="https://southhub.ru/" target="_blank"><img src="~/assets/sh/footer-logo-black.svg" alt="South HUB" class="footer-logo" /></a>
 
         <div class="contacts">
           <p class="label">Контакты:</p>
@@ -33,9 +33,9 @@
         </div>
 
         <div class="icons">
-          <a href="https://www.youtube.com/@sthhb" target="_blank"><img src="/sh/youtube.svg" alt="YouTube" width="24" height="24" /></a>
-          <a href="https://www.linkedin.com/company/south-hub/" target="_blank"><img src="/sh/linkedin.svg" alt="LinkedIn" width="24" height="24" /></a>
-          <a href="https://t.me/+A-vMV8yq_6M3ZjFi" target="_blank"><img src="/sh/telegram.svg" alt="Telegram" width="24" height="24" /></a>
+          <a href="https://www.youtube.com/@sthhb" target="_blank"><img src="~/assets/sh/youtube.svg" alt="YouTube" width="24" height="24" /></a>
+          <a href="https://www.linkedin.com/company/south-hub/" target="_blank"><img src="~/assets/sh/linkedin.svg" alt="LinkedIn" width="24" height="24" /></a>
+          <a href="https://t.me/+A-vMV8yq_6M3ZjFi" target="_blank"><img src="~/assets/sh/telegram.svg" alt="Telegram" width="24" height="24" /></a>
         </div>
       </div>
     </footer>

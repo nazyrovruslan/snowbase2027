@@ -1,19 +1,19 @@
 <template>
   <section class="hero" :class="{ alt }">
     <!-- фото: основное и закат (появляется при наведении на «Подать заявку») -->
-    <img class="abs photo" src="/sb/hero.png" alt="" />
-    <img class="abs photo photo-alt" src="/sb/hero-hover.webp" alt="" />
+    <img class="abs photo" src="~/assets/sb/hero.png" alt="" />
+    <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
     <!-- навигация -->
-    <img class="abs logo" src="/sb/logo.svg" alt="Snow BASE by South HUB" />
+    <img class="abs logo" src="~/assets/sb/logo.svg" alt="Snow BASE by South HUB" />
     <span class="abs menu" style="left: 1125px">South HUB'2027</span>
     <a class="abs menu link" style="left: 1273px" href="https://t.me/southhub_com" target="_blank">Задать вопрос</a>
     <a class="abs login" href="https://lk.southhub.ru/accounts/login/" target="_blank">
-      <img src="/sb/user.svg" alt="" width="16" height="20" />Войти
+      <img src="~/assets/sb/user.svg" alt="" width="16" height="20" />Войти
     </a>
     <a class="abs corners tg" href="https://t.me/+Up2b6jqa30xhYzMy?utm_source=SB&utm_medium=landing&utm_campaign=invite" target="_blank" aria-label="Telegram">
       <i /><i /><i /><i />
-      <img src="/sb/tg.svg" alt="" width="22" height="18" />
+      <img src="~/assets/sb/tg.svg" alt="" width="22" height="18" />
     </a>
 
     <!-- заголовок -->
@@ -46,25 +46,25 @@
     >Подать заявку</a>
 
     <div class="abs pill" style="left: 1125px">
-      <img src="/sb/calendar.svg" alt="" width="19" height="16" />25–28 февраля, 2027
+      <img src="~/assets/sb/calendar.svg" alt="" width="19" height="16" />25–28 февраля, 2027
     </div>
     <div class="abs pill" style="left: 1371px">
-      <img src="/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
+      <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
     </div>
 
     <a class="abs card" href="#" @click.prevent="video = true">
       <span class="thumb">
-        <img class="thumb-img" src="/sb/video.png" alt="" />
-        <img class="play" src="/sb/play.svg" alt="" width="30" height="30" />
+        <img class="thumb-img" src="~/assets/sb/video.png" alt="" />
+        <img class="play" src="~/assets/sb/play.svg" alt="" width="30" height="30" />
       </span>
       <span class="card-title">Как прошёл Snow BASE'2026</span>
-      <img src="/sb/arrow.svg" alt="" width="10" height="10" class="card-arrow" />
+      <img src="~/assets/sb/arrow.svg" alt="" width="10" height="10" class="card-arrow" />
     </a>
 
     <!-- заглушка видео -->
     <div v-if="video" class="modal" @click.self="video = false">
       <div class="modal-box">
-        <img src="/sb/video.png" alt="" />
+        <img src="~/assets/sb/video.png" alt="" />
         <p>Здесь будет видео «Как прошёл Snow BASE'2026»</p>
         <button @click="video = false">Закрыть</button>
       </div>

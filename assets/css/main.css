@@ -1,5 +1,5 @@
-@font-face { font-family: "Mont"; src: url("/fonts/Mont-Book.woff2") format("woff2"); font-weight: 300 900; font-display: swap; }
-@font-face { font-family: "Mont"; src: url("/fonts/Mont-ExtraLight.woff2") format("woff2"); font-weight: 100 299; font-display: swap; }
+@font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-Book.woff2") format("woff2"); font-weight: 300 900; font-display: swap; }
+@font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-ExtraLight.woff2") format("woff2"); font-weight: 100 299; font-display: swap; }
 
 /* Макет свёрстан в ширину 1920px (как в Figma) и масштабируется под окно через zoom */
 :root {
