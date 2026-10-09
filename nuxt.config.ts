@@ -67,7 +67,14 @@ export default defineNuxtConfig({
                 location: {
                   '@type': 'Place',
                   name: 'Архыз',
-                  address: { '@type': 'PostalAddress', addressLocality: 'Архыз', addressRegion: 'Карачаево-Черкесская Республика', addressCountry: 'RU' },
+                  address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: 'Горная улица, 45',
+                    addressLocality: 'село Архыз',
+                    addressRegion: 'Карачаево-Черкесская Республика',
+                    addressCountry: 'RU',
+                  },
+                  geo: { '@type': 'GeoCoordinates', latitude: 43.539484, longitude: 41.184666 },
                 },
                 organizer: { '@type': 'Organization', name: 'South HUB', url: 'https://southhub.ru' },
                 url: SITE_URL,

@@ -33,7 +33,7 @@
     <div class="abs pill" style="left: 34px; width: 202px">
       <img src="~/assets/mob/calendar.svg" alt="" width="16" height="13" />25–28 февраля, 2027
     </div>
-    <a class="abs pill pill-link" style="left: 256px; width: 100px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" aria-label="Архыз на карте" @click.prevent="map = true">
+    <a class="abs pill pill-link" style="left: 256px; width: 100px" href="https://yandex.ru/maps/?ll=41.184666%2C43.539484&amp;z=16&amp;pt=41.184666%2C43.539484%2Cpm2rdm" aria-label="Архыз на карте" @click.prevent="map = true">
       <img src="~/assets/mob/pin.svg" alt="" width="13" height="16" />Aрхыз
     </a>
     </div>

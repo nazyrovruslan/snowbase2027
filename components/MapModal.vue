@@ -6,7 +6,7 @@
         <div class="head">
           <span class="place">
             <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />
-            Архыз, Карачаево-Черкесия
+            Горная улица, 45, Архыз
           </span>
           <button class="corners close" aria-label="Закрыть карту" @click="open = false">
             <i /><i /><i /><i />
@@ -19,7 +19,7 @@
           <!-- виджет Яндекса не настраивается по цветам, поэтому карта приводится к монохрому фильтром -->
           <iframe
             class="map"
-            :src="`https://yandex.ru/map-widget/v1/?ll=${LON}%2C${LAT}&z=11&pt=${LON}%2C${LAT}%2Cpm2dgm`"
+            :src="`https://yandex.ru/map-widget/v1/?ll=${LON}%2C${LAT}&z=15&pt=${LON}%2C${LAT}%2Cpm2dgm`"
             title="Архыз на Яндекс Картах"
             allowfullscreen
           />
@@ -30,9 +30,9 @@
 </template>
 
 <script setup>
-// посёлок Архыз
-const LAT = 43.5617
-const LON = 41.2847
+// Горная улица, 45, село Архыз
+const LAT = 43.539484
+const LON = 41.184666
 
 const open = useState('map', () => false)
 const onKey = (e) => { if (e.key === 'Escape') open.value = false }
