@@ -1,6 +1,6 @@
 <template>
-  <section class="hero" :class="{ alt }">
-    <img class="abs photo" src="~/assets/mob/hero.png" alt="" />
+  <section ref="hero" class="hero" :class="{ alt }">
+    <img class="abs photo" src="~/assets/mob/hero.jpg" alt="" />
     <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
     <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
@@ -31,11 +31,6 @@
       class="abs cta"
       href="https://lk.southhub.ru/"
       target="_blank"
-      @mouseenter="alt = true"
-      @mouseleave="alt = false"
-      @touchstart.passive="alt = true"
-      @touchend="alt = false"
-      @touchcancel="alt = false"
     >Подать заявку</a>
 
     <div class="abs pill" style="left: 34px">
@@ -47,7 +42,7 @@
 
     <a class="abs card" href="#" @click.prevent="video = true">
       <span class="thumb">
-        <video class="thumb-img" src="~/assets/video/preview-2026.mp4" poster="~/assets/video/poster-2026.png" muted autoplay loop playsinline preload="metadata" aria-hidden="true" />
+        <video ref="preview" class="thumb-img" src="~/assets/video/preview-2026.mp4" poster="~/assets/video/poster-2026.jpg" muted loop playsinline preload="none" aria-hidden="true" />
         <img class="play" src="~/assets/mob/play.svg" alt="" width="30" height="30" />
       </span>
       <span class="card-link">
@@ -59,7 +54,7 @@
     <!-- меню -->
     <Transition name="fade">
       <div v-if="menu" class="menu">
-        <img class="abs photo" src="~/assets/mob/hero.png" alt="" />
+        <img class="abs photo" src="~/assets/mob/hero.jpg" alt="" />
         <div class="abs menu-bg" />
         <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
         <button class="abs close" aria-label="Закрыть меню" @click="menu = false">
@@ -88,8 +83,19 @@
 
 <script setup>
 const video = useState('video', () => false)
+const preview = ref(null)
+useAutoplayWhenVisible(preview)
 const alt = ref(false)
 const menu = ref(false)
+
+// смена фото на закат после прокрутки 30% первого экрана
+const hero = ref(null)
+const onScroll = () => {
+  const r = hero.value?.getBoundingClientRect()
+  if (r) alt.value = -r.top >= r.height * 0.3
+}
+onMounted(() => { window.addEventListener('scroll', onScroll, { passive: true }); onScroll() })
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : '' })
 </script>
 

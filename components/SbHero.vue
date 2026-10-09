@@ -1,7 +1,7 @@
 <template>
   <section class="hero" :class="{ alt }">
     <!-- фото: основное и закат (появляется при наведении на «Подать заявку») -->
-    <img class="abs photo" src="~/assets/sb/hero.png" alt="" />
+    <img class="abs photo" src="~/assets/sb/hero.jpg" alt="" />
     <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
     <!-- навигация -->
@@ -54,7 +54,7 @@
 
     <a class="abs card" href="#" @click.prevent="video = true">
       <span class="thumb">
-        <video class="thumb-img" src="~/assets/video/preview-2026.mp4" poster="~/assets/video/poster-2026.png" muted autoplay loop playsinline preload="metadata" aria-hidden="true" />
+        <video ref="preview" class="thumb-img" src="~/assets/video/preview-2026.mp4" poster="~/assets/video/poster-2026.jpg" muted loop playsinline preload="none" aria-hidden="true" />
         <img class="play" src="~/assets/sb/play.svg" alt="" width="30" height="30" />
       </span>
       <span class="card-title">Как прошёл Snow BASE'2026</span>
@@ -67,6 +67,8 @@
 <script setup>
 const alt = ref(false)
 const video = useState("video", () => false)
+const preview = ref(null)
+useAutoplayWhenVisible(preview)
 </script>
 
 <style scoped>
