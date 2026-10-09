@@ -3,7 +3,7 @@
     <img class="abs photo" src="~/assets/sb/hero.jpg" alt="" />
     <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
-    <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
+    <SbLogo class="logo" :src="logoUrl" />
     <button class="abs burger" aria-label="Меню" @click="menu = true">
       <img src="~/assets/mob/burger.svg" alt="" width="50" height="14" />
     </button>
@@ -59,7 +59,7 @@
       <div v-if="menu" class="menu">
         <img class="abs photo" src="~/assets/sb/hero.jpg" alt="" />
         <div class="abs menu-bg" />
-        <img class="abs logo" src="~/assets/mob/logo.svg" alt="Snow BASE by South HUB" />
+        <SbLogo class="logo" :src="logoUrl" @top="menu = false" />
         <button class="abs close" aria-label="Закрыть меню" @click="menu = false">
           <img src="~/assets/mob/close.svg" alt="" width="18" height="18" />
         </button>
@@ -85,6 +85,7 @@
 </template>
 
 <script setup>
+import logoUrl from '~/assets/mob/logo.svg'
 const video = useState('video', () => false)
 const preview = ref(null)
 useAutoplayWhenVisible(preview)
@@ -107,7 +108,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 .hero { position: relative; width: 390px; height: calc(100dvh / var(--km, 1)); min-height: 712px; overflow: hidden; }
 .mid { left: 0; top: calc((100% - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 15% bottom; transition: opacity .7s ease; }
+.photo { pointer-events: none; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 15% bottom; transition: opacity .7s ease; }
 .photo-alt { opacity: 0; }
 .alt .photo-alt { opacity: 1; }
 

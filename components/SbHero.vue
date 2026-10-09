@@ -5,7 +5,7 @@
     <img class="abs photo photo-alt" src="~/assets/sb/hero-hover.webp" alt="" />
 
     <!-- навигация -->
-    <img class="abs logo" src="~/assets/sb/logo.svg" alt="Snow BASE by South HUB" />
+    <SbLogo class="logo" :src="logoUrl" />
     <span class="abs menu" style="left: 1125px">South HUB'2027</span>
     <a class="abs menu link" style="left: 1273px" href="https://t.me/southhub_com" target="_blank">Задать вопрос</a>
     <a class="abs login" href="https://lk.southhub.ru/accounts/login/" target="_blank">
@@ -68,6 +68,7 @@
 </template>
 
 <script setup>
+import logoUrl from '~/assets/sb/logo.svg'
 const alt = ref(false)
 const video = useState("video", () => false)
 const preview = ref(null)
@@ -79,7 +80,7 @@ useAutoplayWhenVisible(preview)
 .hero { position: relative; width: 1920px; height: calc(100dvh / var(--k, 1)); min-height: 860px; overflow: hidden; }
 .mid { left: 0; top: calc((100% - 996px) * 0.5); width: 1920px; height: 996px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease; }
+.photo { pointer-events: none; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease; }
 .photo-alt { opacity: 0; }
 .alt .photo-alt { opacity: 1; }
 
