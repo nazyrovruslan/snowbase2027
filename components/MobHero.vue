@@ -17,15 +17,10 @@
     </h1>
 
     <div class="abs desc">
-      <p class="t t-main">
+      <p>
         Красивое демо есть у многих. Бизнес-результат — не у каждого. На Snow BASE лидеры AI разбирают, что происходит
         между ними: деньги, технологии, команды и решения, которые пришлось переделать. Четыре дня в горах, чтобы говорить
         о том, что сработало и что осталось за кадром успешных кейсов.
-      </p>
-      <p class="t t-alt">
-        Четыре дня руководители DS, ML, AI, CDO, CTO и CPO из бигтеха вместе разбирают управленческие задачи, проектируют
-        AI-системы, сравнивают подходы и продолжают разговоры даже на склонах. Snow BASE соединяет рабочий кэмп,
-        профессиональное сообщество и горы в одной программе.
       </p>
     </div>
 
@@ -126,10 +121,6 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 .line { left: 50%; transform: translateX(-50%); font-size: 40px; line-height: normal; text-transform: uppercase; white-space: nowrap; }
 
 .desc { left: 16px; top: 300px; width: 358px; font-size: 12px; line-height: 1.3; }
-.t { transition: opacity .5s ease; }
-.t-alt { position: absolute; inset: 0; opacity: 0; }
-.alt .t-main { opacity: 0; }
-.alt .t-alt { opacity: 1; }
 
 .cta, .cta-static {
   width: 358px; height: 50px; display: flex; align-items: center; justify-content: center;
