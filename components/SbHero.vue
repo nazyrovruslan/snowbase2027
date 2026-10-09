@@ -56,7 +56,7 @@
     <div class="abs pill" style="left: 1125px; width: 226px">
       <img src="~/assets/sb/calendar.svg" alt="" width="19" height="16" />25–28 февраля, 2027
     </div>
-    <a class="abs pill pill-link" style="left: 1371px; width: 111px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" target="_blank" aria-label="Архыз на Яндекс Картах">
+    <a class="abs pill pill-link" style="left: 1371px; width: 111px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" aria-label="Архыз на карте" @click.prevent="map = true">
       <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
     </a>
     </div>
@@ -77,6 +77,7 @@
 import logoUrl from '~/assets/sb/logo.svg'
 const alt = ref(false)
 const video = useState("video", () => false)
+const map = useState('map', () => false)
 const preview = ref(null)
 useAutoplayWhenVisible(preview)
 </script>
@@ -112,7 +113,7 @@ useAutoplayWhenVisible(preview)
 h1 { font-weight: 400; }
 .h1 { font-size: 120px; line-height: normal; text-transform: uppercase; white-space: nowrap; }
 
-.desc { left: 1125px; top: 323px; width: 755px; font-size: 14px; line-height: normal; }
+.desc { left: 1125px; top: 323px; width: 755px; font-size: 14px; line-height: 1.3; }
 .t { transition: opacity .5s ease; }
 .t-alt { position: absolute; inset: 0; opacity: 0; }
 .alt .t-main { opacity: 0; }

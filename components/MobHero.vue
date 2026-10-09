@@ -38,7 +38,7 @@
     <div class="abs pill" style="left: 34px; width: 202px">
       <img src="~/assets/mob/calendar.svg" alt="" width="16" height="13" />25–28 февраля, 2027
     </div>
-    <a class="abs pill pill-link" style="left: 256px; width: 100px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" target="_blank" aria-label="Архыз на Яндекс Картах">
+    <a class="abs pill pill-link" style="left: 256px; width: 100px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" aria-label="Архыз на карте" @click.prevent="map = true">
       <img src="~/assets/mob/pin.svg" alt="" width="13" height="16" />Aрхыз
     </a>
     </div>
@@ -87,6 +87,7 @@
 <script setup>
 import logoUrl from '~/assets/mob/logo.svg'
 const video = useState('video', () => false)
+const map = useState('map', () => false)
 const preview = ref(null)
 useAutoplayWhenVisible(preview)
 const alt = ref(false)
@@ -105,8 +106,13 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 
 <style scoped>
 /* хиро на весь экран: высота окна в px макета, не меньше 712, чтобы контент не наезжал друг на друга */
-.hero { position: relative; width: 390px; height: calc(100dvh / var(--km, 1)); min-height: 712px; overflow: hidden; }
-.mid { left: 0; top: calc((100% - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
+.hero { position: relative; width: 390px; height: calc(100vh / var(--km, 1)); min-height: 712px; overflow: hidden; }
+/* lvh — высота экрана со спрятанными панелями браузера: фото уходит под полупрозрачную панель Safari */
+@supports (height: 100lvh) {
+  /* --bar — высота панелей браузера, перекрывающих низ экрана (в px макета) */
+  .hero { height: calc(100lvh / var(--km, 1)); --bar: calc((100lvh - 100dvh) / var(--km, 1)); }
+}
+.mid { left: 0; top: calc((100% - var(--bar, 0px) - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
 .photo { pointer-events: none; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 15% bottom; transition: opacity .7s ease; }
 .photo-alt { opacity: 0; }
@@ -119,7 +125,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 .title { font-weight: 400; }
 .line { left: 50%; transform: translateX(-50%); font-size: 40px; line-height: normal; text-transform: uppercase; white-space: nowrap; }
 
-.desc { left: 16px; top: 300px; width: 358px; font-size: 12px; line-height: normal; }
+.desc { left: 16px; top: 300px; width: 358px; font-size: 12px; line-height: 1.3; }
 .t { transition: opacity .5s ease; }
 .t-alt { position: absolute; inset: 0; opacity: 0; }
 .alt .t-main { opacity: 0; }
@@ -139,7 +145,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 }
 
 .card {
-  left: 16px; bottom: 30px; width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
+  left: 16px; bottom: calc(30px + var(--bar, 0px)); width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
   background: rgba(255,255,255,.5); backdrop-filter: blur(10px); border-radius: 15px;
 }
 .thumb { position: relative; width: 217px; height: 144px; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden; flex: none; }

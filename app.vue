@@ -11,6 +11,7 @@
     <MobFooter />
   </div>
   <VideoModal />
+  <MapModal />
 </template>
 
 <script setup>
