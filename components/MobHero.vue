@@ -100,14 +100,23 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 </script>
 
 <style scoped>
-/* хиро на весь экран: высота окна в px макета, не меньше 712, чтобы контент не наезжал друг на друга */
-.hero { position: relative; width: 390px; height: calc(100vh / var(--km, 1)); min-height: 712px; overflow: hidden; }
-/* lvh — высота экрана со спрятанными панелями браузера: фото уходит под полупрозрачную панель Safari */
-@supports (height: 100lvh) {
-  /* --bar — высота панелей браузера, перекрывающих низ экрана (в px макета) */
-  .hero { height: calc(100lvh / var(--km, 1)); --bar: calc((100lvh - 100dvh) / var(--km, 1)); }
+/*
+  Хиро на весь экран (всё в px макета 390).
+  --vis — видимая высота экрана с панелями браузера (svh не меняется при прокрутке, поэтому ничего не «ездит»),
+  но не меньше 724px: при меньшей высоте карточка наезжала бы на плашки даты/места — тогда она уходит ниже первого экрана.
+  Высота хиро — lvh (панели спрятаны): фото заходит под полупрозрачную панель Safari.
+*/
+.hero {
+  --vis: max(calc(100vh / var(--km, 1)), 724px);
+  position: relative; width: 390px; height: var(--vis); overflow: hidden;
 }
-.mid { left: 0; top: calc((100% - var(--bar, 0px) - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
+@supports (height: 100svh) {
+  .hero {
+    --vis: max(calc(100svh / var(--km, 1)), 724px);
+    height: max(calc(100lvh / var(--km, 1)), var(--vis));
+  }
+}
+.mid { left: 0; top: calc((var(--vis) - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
 .mid > * { pointer-events: auto; }
 .photo { pointer-events: none; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 15% bottom; transition: opacity .7s ease; }
 .photo-alt { opacity: 0; }
@@ -136,7 +145,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 }
 
 .card {
-  left: 16px; bottom: calc(30px + var(--bar, 0px)); width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
+  left: 16px; bottom: calc(100% - var(--vis) + 30px); width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
   background: rgba(255,255,255,.5); backdrop-filter: blur(10px); border-radius: 15px;
 }
 .thumb { position: relative; width: 217px; height: 144px; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden; flex: none; }
