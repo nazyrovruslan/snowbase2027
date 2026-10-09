@@ -12,6 +12,7 @@
   </div>
   <VideoModal />
   <MapModal />
+  <CookieBanner />
 </template>
 
 <script setup>
@@ -24,7 +25,18 @@ useHead({
     { rel: 'icon', type: 'image/png', sizes: '16x16', href: base + 'favicon-16.png' },
     { rel: 'icon', type: 'image/png', sizes: '196x196', href: base + 'favicon-196.png' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: base + 'apple-touch-icon.png' },
+    { rel: 'manifest', href: base + 'site.webmanifest' },
   ],
+})
+
+// robots и noscript-пиксель Метрики зависят от окружения (прод / тестовый сайт)
+const cfg = useRuntimeConfig().public
+const on = (v) => v === true || v === 'true'
+useHead({
+  meta: [{ name: 'robots', content: on(cfg.indexable) ? 'index, follow' : 'noindex, nofollow' }],
+  noscript: on(cfg.enableMetric)
+    ? [{ innerHTML: `<div><img src="https://mc.yandex.ru/watch/${cfg.metrikaId}" style="position:absolute; left:-9999px;" alt="" /></div>` }]
+    : [],
 })
 
 const k = ref(1)

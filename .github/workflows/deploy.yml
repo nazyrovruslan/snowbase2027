@@ -28,6 +28,9 @@ jobs:
         env:
           NITRO_PRESET: github_pages
           NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+          # тестовый сайт: не индексировать, Метрика выключена
+          NUXT_PUBLIC_INDEXABLE: "false"
+          NUXT_PUBLIC_ENABLE_METRIC: "false"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
