@@ -38,9 +38,9 @@
     <div class="abs pill" style="left: 34px; width: 202px">
       <img src="~/assets/mob/calendar.svg" alt="" width="16" height="13" />25–28 февраля, 2027
     </div>
-    <div class="abs pill" style="left: 256px; width: 100px">
+    <a class="abs pill pill-link" style="left: 256px; width: 100px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" target="_blank" aria-label="Архыз на Яндекс Картах">
       <img src="~/assets/mob/pin.svg" alt="" width="13" height="16" />Aрхыз
-    </div>
+    </a>
     </div>
 
     <a class="abs card" href="#" @click.prevent="video = true">
@@ -64,7 +64,7 @@
           <img src="~/assets/mob/close.svg" alt="" width="18" height="18" />
         </button>
 
-        <span class="abs menu-item" style="top: 320px">South HUB'2027<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></span>
+        <a class="abs menu-item" style="top: 320px" href="https://southhub.ru/" target="_blank">South HUB'2027<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></a>
         <a class="abs menu-item" style="top: 441px" href="https://t.me/southhub_com" target="_blank">Задать вопрос<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></a>
 
         <div class="menu-bottom">

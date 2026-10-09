@@ -6,8 +6,14 @@
 
     <!-- навигация -->
     <SbLogo class="logo" :src="logoUrl" />
-    <span class="abs menu" style="left: 1125px">South HUB'2027</span>
-    <a class="abs menu link" style="left: 1273px" href="https://t.me/southhub_com" target="_blank">Задать вопрос</a>
+    <a class="abs menu" style="left: 1125px" href="https://southhub.ru/" target="_blank">
+      <span>South HUB'2027</span>
+      <span class="nav-arrow" aria-hidden="true"><img class="arrow-hover" src="~/assets/sb/nav-arrow-hover.svg" alt="" /><img class="arrow-active" src="~/assets/sb/nav-arrow-active.svg" alt="" /></span>
+    </a>
+    <a class="abs menu" style="left: 1273px" href="https://t.me/southhub_com" target="_blank">
+      <span>Задать вопрос</span>
+      <span class="nav-arrow" aria-hidden="true"><img class="arrow-hover" src="~/assets/sb/nav-arrow-hover.svg" alt="" /><img class="arrow-active" src="~/assets/sb/nav-arrow-active.svg" alt="" /></span>
+    </a>
     <a class="abs login" href="https://lk.southhub.ru/accounts/login/" target="_blank">
       <img src="~/assets/sb/user.svg" alt="" width="16" height="20" />Войти
     </a>
@@ -50,9 +56,9 @@
     <div class="abs pill" style="left: 1125px; width: 226px">
       <img src="~/assets/sb/calendar.svg" alt="" width="19" height="16" />25–28 февраля, 2027
     </div>
-    <div class="abs pill" style="left: 1371px; width: 111px">
+    <a class="abs pill pill-link" style="left: 1371px; width: 111px" href="https://yandex.ru/maps/?ll=41.2847%2C43.5617&amp;z=12&amp;pt=41.2847%2C43.5617%2Cpm2rdm" target="_blank" aria-label="Архыз на Яндекс Картах">
       <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
-    </div>
+    </a>
     </div>
 
     <a class="abs card" href="#" @click.prevent="video = true">
@@ -85,8 +91,16 @@ useAutoplayWhenVisible(preview)
 .alt .photo-alt { opacity: 1; }
 
 .logo { left: 40px; top: 33px; width: 202px; height: 44px; }
-.menu { top: 46px; font-size: 14px; }
-.link:hover { opacity: .6; }
+/* пункты меню: при наведении справа появляется стрелка, при нажатии — полупрозрачная */
+.menu { top: 46px; font-size: 14px; line-height: normal; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+.nav-arrow { position: relative; width: 12px; height: 12px; flex: none; }
+.nav-arrow img { position: absolute; inset: 0; width: 12px; height: 12px; opacity: 0; transition: opacity .25s ease; }
+.menu:hover .arrow-hover { opacity: 1; }
+.menu:active > span:first-child { opacity: .5; }
+.menu:active .arrow-hover { opacity: 0; }
+.menu:active .arrow-active { opacity: 1; }
+.pill-link { transition: background .2s ease; }
+.pill-link:hover { background: rgba(255,255,255,.75); }
 .login {
   left: 1700px; top: 30px; height: 50px; display: flex; gap: 10px; align-items: center;
   padding: 0 20px 0 15px; background: var(--black); color: var(--white); border-radius: 15px; font-size: 16px;

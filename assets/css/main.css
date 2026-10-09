@@ -1,4 +1,6 @@
-@font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-Book.woff2") format("woff2"); font-weight: 300 900; font-display: swap; }
+/* Mont Regular — основной (как в Figma), Book — для блоков, перенесённых с southhub.ru (font-weight: 300) */
+@font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-Regular.ttf") format("truetype"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-Book.woff2") format("woff2"); font-weight: 300 399; font-display: swap; }
 @font-face { font-family: "Mont"; src: url("~/assets/fonts/Mont-ExtraLight.woff2") format("woff2"); font-weight: 100 299; font-display: swap; }
 
 /* Макет свёрстан в ширину 1920px (как в Figma) и масштабируется под окно через zoom */
@@ -32,7 +34,7 @@ a { color: inherit; text-decoration: none; }
 /* кнопка с «скобками» как base-button_black на southhub.ru */
 .base-button {
   position: relative; width: 191px; height: 28px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; text-transform: lowercase; color: #111; transition: width .5s ease-in-out;
+  font-size: 16px; font-weight: 300; text-transform: lowercase; color: #111; transition: width .5s ease-in-out;
 }
 .base-button:hover { width: 211px; }
 .base-button::before, .base-button::after {

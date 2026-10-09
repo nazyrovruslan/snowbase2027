@@ -70,6 +70,6 @@ onBeforeUnmount(() => cancelAnimationFrame(raf))
 /* текст занимает место 4 ячеек: 200px + 3 промежутка */
 .text-cell {
   width: calc(200px + (1800px - 50px * 16) / 15 * 3);
-  color: #fff; font-size: 22px; font-weight: 400; line-height: 110%; white-space: pre;
+  color: #fff; font-size: 22px; font-weight: 300; line-height: 110%; white-space: pre;
 }
 </style>

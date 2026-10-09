@@ -107,5 +107,5 @@ onBeforeUnmount(() => cancelAnimationFrame(raf))
 .cells { width: 200px; display: flex; justify-content: space-between; }
 .cell { width: 20px; height: 40px; display: flex; align-items: center; justify-content: center; flex: none; }
 .u { width: 20px; height: 21px; will-change: transform; }
-.slogan { color: var(--white); font-size: 15px; line-height: normal; white-space: nowrap; }
+.slogan { color: var(--white); font-weight: 300; font-size: 15px; line-height: normal; white-space: nowrap; }
 </style>

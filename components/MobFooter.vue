@@ -41,7 +41,7 @@
 </template>
 
 <style scoped>
-.footer-area { width: 390px; background: #eaeaea; color: #111; padding: 60px 16px 40px; }
+.footer-area { width: 390px; background: #eaeaea; color: #111; padding: 60px 16px 40px; font-weight: 300; }
 .about { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
 .about-text { font-size: 20px; line-height: normal; margin-bottom: -20px; }
 .contact { width: 150px; }

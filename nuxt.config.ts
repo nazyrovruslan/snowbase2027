@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      title: 'Snow BASE 26',
+      title: 'Snow BASE 2027 — Кэмп для C-level в AI',
       htmlAttrs: { lang: 'ru' },
       meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
     }

@@ -43,14 +43,14 @@
 </template>
 
 <style scoped>
-.footer-area { width: 1920px; background: #eaeaea; color: #111; }
+.footer-area { width: 1920px; background: #eaeaea; color: #111; font-weight: 300; }
 
 /* median.agency */
 .about { display: flex; align-items: center; gap: 24px; padding: 100px 60px; }
 .about-logo { min-width: 200px; }
 .about-line { flex: 1; height: 1px; background: #111; }
 .about-btn-wrap { display: flex; justify-content: center; min-width: 211px; max-width: 211px; }
-.about-text { min-width: 500px; max-width: 500px; font-size: 22px; font-weight: 400; line-height: 130%; white-space: nowrap; }
+.about-text { min-width: 500px; max-width: 500px; font-size: 22px; font-weight: 300; line-height: 130%; white-space: nowrap; }
 
 /* футер */
 .footer { padding: 100px 60px 50px; }
@@ -60,7 +60,7 @@
 .contacts { display: flex; flex-direction: column; gap: 6px; }
 .contacts-second { gap: 2px; }
 .items { display: flex; gap: 4px; }
-.label, .link { font-size: 16px; font-weight: 400; line-height: 100%; }
+.label, .link { font-size: 16px; font-weight: 300; line-height: 100%; }
 .dashed { width: fit-content; border-bottom: 1px solid rgba(17, 17, 17, .5); }
 .link:hover, .dashed:hover, .icons a:hover { opacity: .6; }
 .icons { display: flex; align-items: center; gap: 30px; }
