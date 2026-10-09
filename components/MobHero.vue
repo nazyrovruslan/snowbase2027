@@ -8,6 +8,8 @@
       <img src="~/assets/mob/burger.svg" alt="" width="50" height="14" />
     </button>
 
+    <!-- центральный блок: сдвигается вместе с высотой экрана -->
+    <div class="abs mid">
     <h1 class="title">
       <span class="abs line" style="top: 137px; margin-left: -61px">Snow BASE</span>
       <span class="abs line" style="top: 188px; margin-left: -4px">Кэмп</span>
@@ -38,6 +40,7 @@
     </div>
     <div class="abs pill" style="left: 256px">
       <img src="~/assets/mob/pin.svg" alt="" width="13" height="16" />Aрхыз
+    </div>
     </div>
 
     <a class="abs card" href="#" @click.prevent="video = true">
@@ -100,8 +103,11 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 </script>
 
 <style scoped>
-.hero { position: relative; width: 390px; height: 844px; overflow: hidden; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: fill; transition: opacity .7s ease, transform 1.4s ease; }
+/* хиро на весь экран: высота окна в px макета, не меньше 712, чтобы контент не наезжал друг на друга */
+.hero { position: relative; width: 390px; height: calc(100dvh / var(--km, 1)); min-height: 712px; overflow: hidden; }
+.mid { left: 0; top: calc((100% - 844px) * 0.25); width: 390px; height: 844px; pointer-events: none; }
+.mid > * { pointer-events: auto; }
+.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease, transform 1.4s ease; }
 .photo-alt { object-fit: cover; opacity: 0; transform: scale(1.03); }
 .alt .photo-alt { opacity: 1; transform: scale(1); }
 
@@ -132,7 +138,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 }
 
 .card {
-  left: 16px; top: 650px; width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
+  left: 16px; bottom: 30px; width: 358px; display: flex; gap: 10px; align-items: center; padding: 10px;
   background: rgba(255,255,255,.5); backdrop-filter: blur(10px); border-radius: 15px;
 }
 .thumb { position: relative; width: 217px; height: 144px; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden; flex: none; }

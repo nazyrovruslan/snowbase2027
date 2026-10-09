@@ -17,6 +17,8 @@
     </a>
 
     <!-- заголовок -->
+    <!-- центральный блок: центрируется по высоте экрана -->
+    <div class="abs mid">
     <h1>
       <span class="abs h1" style="left: 40px; top: 300px">Snow BASE</span>
       <span class="abs h1" style="left: 457px; top: 453px">Кэмп для C-level в AI</span>
@@ -51,6 +53,7 @@
     <div class="abs pill" style="left: 1371px">
       <img src="~/assets/sb/pin.svg" alt="" width="17" height="20" />Aрхыз
     </div>
+    </div>
 
     <a class="abs card" href="#" @click.prevent="video = true">
       <span class="thumb">
@@ -72,8 +75,11 @@ useAutoplayWhenVisible(preview)
 </script>
 
 <style scoped>
-.hero { position: relative; width: 1920px; height: 996px; overflow: hidden; }
-.photo { inset: 0; width: 100%; height: 100%; object-fit: fill; transition: opacity .7s ease, transform 1.4s ease; }
+/* хиро на весь экран: высота окна в px макета, не меньше 860 */
+.hero { position: relative; width: 1920px; height: calc(100dvh / var(--k, 1)); min-height: 860px; overflow: hidden; }
+.mid { left: 0; top: calc((100% - 996px) * 0.5); width: 1920px; height: 996px; pointer-events: none; }
+.mid > * { pointer-events: auto; }
+.photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; transition: opacity .7s ease, transform 1.4s ease; }
 .photo-alt { object-fit: cover; opacity: 0; transform: scale(1.03); }
 .alt .photo-alt { opacity: 1; transform: scale(1); }
 
@@ -110,7 +116,7 @@ h1 { font-weight: 400; }
 }
 
 .card {
-  left: 1125px; top: 776px; width: 755px; display: flex; align-items: center; justify-content: space-between;
+  left: 1125px; bottom: 40px; width: 755px; display: flex; align-items: center; justify-content: space-between;
   padding: 10px 20px 10px 10px; background: rgba(255,255,255,.5); backdrop-filter: blur(10px); border-radius: 15px;
   transition: background .3s ease;
 }
