@@ -54,27 +54,19 @@
 
     <a class="abs card" href="#" @click.prevent="video = true">
       <span class="thumb">
-        <img class="thumb-img" src="~/assets/sb/video.png" alt="" />
+        <video class="thumb-img" src="~/assets/video/preview-2026.mp4" poster="~/assets/video/poster-2026.png" muted autoplay loop playsinline preload="metadata" aria-hidden="true" />
         <img class="play" src="~/assets/sb/play.svg" alt="" width="30" height="30" />
       </span>
       <span class="card-title">Как прошёл Snow BASE'2026</span>
       <img src="~/assets/sb/arrow.svg" alt="" width="10" height="10" class="card-arrow" />
     </a>
 
-    <!-- заглушка видео -->
-    <div v-if="video" class="modal" @click.self="video = false">
-      <div class="modal-box">
-        <img src="~/assets/sb/video.png" alt="" />
-        <p>Здесь будет видео «Как прошёл Snow BASE'2026»</p>
-        <button @click="video = false">Закрыть</button>
-      </div>
-    </div>
   </section>
 </template>
 
 <script setup>
 const alt = ref(false)
-const video = ref(false)
+const video = useState("video", () => false)
 </script>
 
 <style scoped>
@@ -129,8 +121,4 @@ h1 { font-weight: 400; }
 .card-arrow { transition: transform .3s ease; }
 .card:hover .card-arrow { transform: translate(3px, -3px); }
 
-.modal { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; }
-.modal-box { background: var(--white); border-radius: 15px; padding: 20px; width: 900px; display: flex; flex-direction: column; gap: 16px; font-size: 20px; }
-.modal-box img { width: 100%; border-radius: 10px; }
-.modal-box button { align-self: flex-start; font: inherit; font-size: 16px; padding: 12px 24px; border: 1px solid var(--black); border-radius: 15px; background: none; cursor: pointer; }
 </style>

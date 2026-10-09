@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Play">
+<foreignObject x="-20" y="-20" width="70" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_0_29_clip_path);height:100%;width:100%"></div></foreignObject><rect id="Bg" data-figma-bg-blur-radius="20" width="30" height="30" rx="5" fill="white" fill-opacity="0.5"/>
+<path id="Icon" d="M20.883 14.1213C21.5797 14.4999 21.5797 15.5001 20.883 15.8787L11.2275 21.1254C10.5611 21.4875 9.75 21.0051 9.75 20.2467V9.75328C9.75 8.99493 10.5611 8.51255 11.2275 8.87463L20.883 14.1213Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="bgblur_0_0_29_clip_path" transform="translate(20 20)"><rect width="30" height="30" rx="5"/>
+</clipPath></defs>
+</svg>

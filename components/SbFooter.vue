@@ -52,24 +52,6 @@
 .about-btn-wrap { display: flex; justify-content: center; min-width: 211px; max-width: 211px; }
 .about-text { min-width: 500px; max-width: 500px; font-size: 22px; font-weight: 400; line-height: 130%; white-space: nowrap; }
 
-/* кнопка с «скобками» как base-button_black на southhub.ru */
-.base-button {
-  position: relative; width: 191px; height: 28px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; text-transform: lowercase; color: #111; transition: width .5s ease-in-out;
-}
-.base-button:hover { width: 211px; }
-.base-button::before, .base-button::after {
-  content: ''; position: absolute; top: 0; width: 12px; height: 28px; background-repeat: no-repeat; background-size: 100% 100%;
-}
-.base-button::before {
-  left: 0;
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.21387 12L1.21387 8.36893L1.21387 6.1068C1.21387 3.34537 3.45244 1.1068 6.21387 1.1068L8.476 1.1068L12.1071 1.1068' stroke='%23111111'/%3e%3cpath d='M12.1064 26.8932L8.47538 26.8932L6.21324 26.8932C3.45182 26.8932 1.21324 24.6546 1.21324 21.8932L1.21324 19.6311L1.21324 16' stroke='%23111111'/%3e%3c/svg%3e");
-}
-.base-button::after {
-  right: 0;
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M10.8936 12L10.8936 8.36893L10.8936 6.1068C10.8936 3.34537 8.65498 1.1068 5.89355 1.1068L3.63142 1.1068L0.000351845 1.1068' stroke='%23111111'/%3e%3cpath d='M0.000976562 26.8932L3.63204 26.8932L5.89418 26.8932C8.6556 26.8932 10.8942 24.6546 10.8942 21.8932L10.8942 19.6311L10.8942 16' stroke='%23111111'/%3e%3c/svg%3e");
-}
-
 /* футер */
 .footer { padding: 100px 60px 50px; }
 .footer-line { height: 1px; background: rgba(17, 17, 17, .2); margin-bottom: 80px; }
