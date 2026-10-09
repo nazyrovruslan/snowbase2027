@@ -1,0 +1,27 @@
+@font-face { font-family: "Mont"; src: url("/fonts/Mont-Book.woff2") format("woff2"); font-weight: 300 900; font-display: swap; }
+@font-face { font-family: "Mont"; src: url("/fonts/Mont-ExtraLight.woff2") format("woff2"); font-weight: 100 299; font-display: swap; }
+
+/* Макет свёрстан в ширину 1920px (как в Figma) и масштабируется под окно через zoom */
+:root {
+  --black: #000;
+  --white: #fff;
+  --grey: #c7c7c7;
+  --light: #f8f8f8;
+  --font: "Mont", Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--light); color: var(--black); font-family: var(--font); overflow-x: hidden; }
+img { display: block; max-width: none; }
+a { color: inherit; text-decoration: none; }
+.page { width: 1920px; zoom: var(--k, 1); position: relative; }
+.abs { position: absolute; }
+.nowrap { white-space: nowrap; }
+
+/* «уголки» вокруг кнопок Связаться / Telegram */
+.corners { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.corners > i { position: absolute; width: 10px; height: 10px; border: 0 solid currentColor; transition: all .25s ease; }
+.corners > i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.corners > i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.corners > i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.corners > i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.corners:hover > i { width: 50%; height: 50%; }
