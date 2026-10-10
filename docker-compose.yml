@@ -1,0 +1,9 @@
+# Пример запуска на сервере. Основной nginx southhub.ru проксирует /snowbase/ на этот контейнер:
+#   location /snowbase/ { proxy_pass http://127.0.0.1:8080; proxy_set_header Host $host; }
+services:
+  snowbase:
+    image: ghcr.io/nazyrovruslan/snowbase2027:latest
+    # или собрать на месте: build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"

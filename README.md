@@ -31,6 +31,37 @@ NUXT_PUBLIC_ENABLE_METRIC=true npm run generate
 | `NUXT_PUBLIC_ENABLE_METRIC` | `false` | Яндекс Метрика 89187152, как на southhub.ru |
 | `NUXT_PUBLIC_INDEXABLE` | `true` | `robots: index, follow`; `false` → `noindex, nofollow` |
 
+## Docker-образ для прода
+
+Образ собирается автоматически в GitHub Actions (`.github/workflows/docker.yml`) при каждом пуше в `main`
+и при теге `v*`, проходит проверку (страница, Метрика, редиректы, кэш, 404) и публикуется в GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/nazyrovruslan/snowbase2027:latest
+docker run -d --restart unless-stopped -p 127.0.0.1:8080:8080 ghcr.io/nazyrovruslan/snowbase2027:latest
+```
+
+- внутри: nginx без root, порт **8080**, страница по пути **`/snowbase/`**, проверка здоровья — `GET /healthz`
+- собран с продовыми настройками: Метрика 89187152 включена, `robots: index, follow`
+- теги: `latest` (последний `main`), `sha-<коммит>`, `v1.0.0` (для релизных тегов)
+- пример запуска — `docker-compose.yml`
+
+Основной nginx southhub.ru должен проксировать `/snowbase/` в контейнер без изменения пути:
+
+```nginx
+location /snowbase/ {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_set_header Host $host;
+}
+```
+
+Собрать образ вручную (с другими настройками — через `--build-arg`):
+
+```bash
+docker build -t snowbase .
+docker build --build-arg NUXT_PUBLIC_ENABLE_METRIC=false -t snowbase:nometrika .
+```
+
 ## Что перенесено с southhub.ru
 
 - slug `/snowbase/`, canonical `https://southhub.ru/snowbase/`, `og:site_name` Southuuub

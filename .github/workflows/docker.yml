@@ -1,0 +1,72 @@
+name: Docker image
+
+# Собирает продовый образ, проверяет контейнер и публикует в GitHub Container Registry:
+#   ghcr.io/<owner>/snowbase2027:latest, :<sha>, :<tag> (для тегов v*)
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: snowbase:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test
+        run: |
+          docker run -d --name sb -p 8080:8080 snowbase:test
+          for i in $(seq 1 20); do curl -fs http://localhost:8080/healthz && break; sleep 1; done
+          set -e
+          page=$(curl -fs http://localhost:8080/snowbase/)
+          echo "$page" | grep -q '<title>Snow BASE 2027'
+          echo "$page" | grep -q 'mc.yandex.ru/watch/89187152'
+          echo "$page" | grep -q 'content="index, follow"'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/snowbase)" = "301"
+          curl -fsI http://localhost:8080/snowbase/ | grep -qi 'cache-control: no-cache'
+          asset=$(echo "$page" | grep -oE '/snowbase/_nuxt/[A-Za-z0-9_.-]+\.js' | head -1)
+          curl -fsI "http://localhost:8080$asset" | grep -qi 'immutable'
+          curl -fsI http://localhost:8080/snowbase/site.webmanifest | grep -qi 'application/manifest+json'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/snowbase/nope)" = "404"
+          echo "smoke test passed"
+          docker rm -f sb
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha
+            type=ref,event=tag
+
+      - name: Push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
