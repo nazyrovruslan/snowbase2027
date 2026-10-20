@@ -31,6 +31,7 @@ jobs:
           # тестовый сайт: не индексировать, Метрика выключена
           NUXT_PUBLIC_INDEXABLE: "false"
           NUXT_PUBLIC_ENABLE_METRIC: "false"
+          OG_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
