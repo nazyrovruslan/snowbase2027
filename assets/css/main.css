@@ -31,23 +31,28 @@ a { color: inherit; text-decoration: none; }
 .corners:hover > i, .corners:focus-visible > i { width: 50%; height: 50%; }
 .corners:focus-visible { outline: none; }
 
-/* кнопка с «скобками» как base-button_black на southhub.ru */
+/* кнопка со «скобками», как на демо South HUB 2027 и base-button на southhub.ru:
+   строчный текст Mont 16px между двумя угловыми скобками, без фона, высота 28px.
+   При наведении скобки за 0.5s расходятся на 25px (по 12.5px в стороны), а коробка кнопки
+   не меняется, чтобы соседи не сдвигались. Скобка — SVG через маску, поэтому берёт цвет текста;
+   правая — отражённая левая. Ширина задаётся через --btn-w */
 .base-button {
-  position: relative; width: 191px; height: 28px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; font-weight: 300; text-transform: lowercase; color: #111; transition: width .5s ease-in-out;
+  --btn-w: 191px; --btn-spread: 0px;
+  position: relative; width: var(--btn-w); height: 28px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 300; line-height: 1; text-transform: lowercase; white-space: nowrap; color: #111;
+  background: transparent; -webkit-tap-highlight-color: transparent; transition: opacity .2s ease;
 }
-.base-button:hover { width: 211px; }
 .base-button::before, .base-button::after {
-  content: ''; position: absolute; top: 0; width: 12px; height: 28px; background-repeat: no-repeat; background-size: 100% 100%;
+  content: ''; position: absolute; top: 0; width: 12px; height: 28px; background: currentColor; pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.214 12V6.107a5 5 0 0 1 5-5h5.893M12.106 26.893H6.213a5 5 0 0 1-5-5V16' stroke='%23000'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.214 12V6.107a5 5 0 0 1 5-5h5.893M12.106 26.893H6.213a5 5 0 0 1-5-5V16' stroke='%23000'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  transition: transform .5s ease-in-out;
 }
-.base-button::before {
-  left: 0;
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.21387 12L1.21387 8.36893L1.21387 6.1068C1.21387 3.34537 3.45244 1.1068 6.21387 1.1068L8.476 1.1068L12.1071 1.1068' stroke='%23111111'/%3e%3cpath d='M12.1064 26.8932L8.47538 26.8932L6.21324 26.8932C3.45182 26.8932 1.21324 24.6546 1.21324 21.8932L1.21324 19.6311L1.21324 16' stroke='%23111111'/%3e%3c/svg%3e");
-}
-.base-button::after {
-  right: 0;
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M10.8936 12L10.8936 8.36893L10.8936 6.1068C10.8936 3.34537 8.65498 1.1068 5.89355 1.1068L3.63142 1.1068L0.000351845 1.1068' stroke='%23111111'/%3e%3cpath d='M0.000976562 26.8932L3.63204 26.8932L5.89418 26.8932C8.6556 26.8932 10.8942 24.6546 10.8942 21.8932L10.8942 19.6311L10.8942 16' stroke='%23111111'/%3e%3c/svg%3e");
-}
+.base-button::before { left: 0; transform: translateX(calc(var(--btn-spread) * -1)); }
+.base-button::after { right: 0; transform: translateX(var(--btn-spread)) scaleX(-1); }
+@media (hover: hover) { .base-button:hover, .base-button:focus-visible { --btn-spread: 12.5px; } }
+.base-button:focus-visible { outline: none; }
+.base-button:active { opacity: .6; }
 
 
 /* мобильная версия (макет 390px) */
@@ -59,9 +64,3 @@ a { color: inherit; text-decoration: none; }
 
 /* белый вариант кнопки со скобками (на тёмном фоне, напр. баннер cookies) */
 .base-button-white { color: #fff; }
-.base-button-white::before {
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.21387 12L1.21387 8.36893L1.21387 6.1068C1.21387 3.34537 3.45244 1.1068 6.21387 1.1068L8.476 1.1068L12.1071 1.1068' stroke='white'/%3e%3cpath d='M12.1064 26.8931L8.47538 26.8931L6.21324 26.8931C3.45182 26.8931 1.21324 24.6545 1.21324 21.8931L1.21324 19.6309L1.21324 15.9999' stroke='white'/%3e%3c/svg%3e");
-}
-.base-button-white::after {
-  background-image: url("data:image/svg+xml,%3csvg width='13' height='28' viewBox='0 0 13 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M10.8936 12L10.8936 8.36893L10.8936 6.1068C10.8936 3.34537 8.65498 1.1068 5.89355 1.1068L3.63142 1.1068L0.000351845 1.1068' stroke='white'/%3e%3cpath d='M0.000976562 26.8931L3.63204 26.8931L5.89418 26.8931C8.6556 26.8931 10.8942 24.6545 10.8942 21.8931L10.8942 19.6309L10.8942 15.9999' stroke='white'/%3e%3c/svg%3e");
-}

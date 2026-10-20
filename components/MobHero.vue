@@ -59,15 +59,12 @@
           <img src="~/assets/mob/close.svg" alt="" width="18" height="18" />
         </button>
 
-        <a class="abs menu-item" style="top: 320px" href="https://southhub.ru/" target="_blank">South HUB'2027<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></a>
-        <a class="abs menu-item" style="top: 441px" href="https://t.me/southhub_com" target="_blank">Задать вопрос<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></a>
+        <a class="abs menu-item" style="top: 320px" href="https://t.me/southhub_com" target="_blank">Задать вопрос<img src="~/assets/mob/arrow-big.svg" alt="" width="18" height="18" /></a>
 
         <div class="menu-bottom">
           <a class="cta-static" href="https://lk.southhub.ru/" target="_blank">Подать заявку</a>
           <div class="menu-row">
-            <a class="login" href="https://lk.southhub.ru/accounts/login/" target="_blank">
-              <img src="~/assets/mob/user-outline.svg" alt="" width="16" height="20" />Войти
-            </a>
+            <a class="base-button login" href="https://lk.southhub.ru/accounts/login/" target="_blank">Войти</a>
             <a class="corners tg" href="https://t.me/+Up2b6jqa30xhYzMy?utm_source=SB&utm_medium=landing&utm_campaign=invite" target="_blank" aria-label="Telegram">
               <i /><i /><i /><i />
               <img src="~/assets/sb/tg.svg" alt="" width="22" height="18" />
@@ -161,7 +158,7 @@ watch(menu, (v) => { document.documentElement.style.overflow = v ? 'hidden' : ''
 .menu-item { left: 16px; width: 358px; display: flex; align-items: center; justify-content: space-between; font-size: 24px; line-height: normal; }
 .menu-bottom { position: absolute; left: 16px; right: 16px; bottom: 30px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .menu-row { display: flex; gap: 20px; align-items: center; }
-.login { height: 50px; display: flex; gap: 10px; align-items: center; padding: 0 20px 0 15px; border: 1px solid var(--black); border-radius: 15px; font-size: 16px; }
+.login { --btn-w: 150px; color: var(--black); }
 .tg { width: 50px; height: 50px; }
 .fade-enter-active, .fade-leave-active { transition: opacity .3s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
