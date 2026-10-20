@@ -3,13 +3,13 @@
   <div class="page page-desktop" :style="{ '--k': k }">
     <SbHero />
     <SbPattern />
-    <SbFooter />
   </div>
   <div class="page-mobile" :style="{ '--km': km }">
     <MobHero />
     <MobPattern />
-    <MobFooter />
   </div>
+  <!-- подвал общий для обеих версий, вне масштабируемого макета — как на демо South HUB 2027 -->
+  <SiteFooter />
   <VideoModal />
   <MapModal />
   <CookieBanner />
