@@ -44,8 +44,7 @@
 .footer-area { width: 390px; background: #eaeaea; color: #111; padding: 60px 16px 40px; font-weight: 300; }
 .about { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
 .about-text { font-size: 20px; line-height: normal; margin-bottom: -20px; }
-.contact { width: 150px; }
-.contact:hover { width: 170px; }
+.contact { --btn-w: 150px; }
 .line { display: block; height: 1px; background: var(--grey); margin: 60px 0 70px; }
 .footer { display: flex; flex-direction: column; gap: 40px; }
 .footer-logo { width: 171px; height: auto; }

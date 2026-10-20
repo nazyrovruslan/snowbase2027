@@ -29,8 +29,7 @@ const accept = () => {
 }
 .cookie-banner-text { color: #fff; font-size: 14px; font-weight: 300; line-height: 125%; max-width: 655px; }
 .cookie-banner-button-wrapper { width: 140px; display: flex; align-items: center; justify-content: center; flex: none; }
-.cookie-banner-button { width: 100px; background: none; border: 0; cursor: pointer; color: #fff; }
-.cookie-banner-button:hover { width: 120px; }
+.cookie-banner-button { --btn-w: 100px; background: none; border: 0; cursor: pointer; color: #fff; }
 @media (max-width: 1024px) {
   .cookie-banner { gap: 20px; padding: 16px; bottom: 10px; }
   .cookie-banner-text { font-size: 12px; }

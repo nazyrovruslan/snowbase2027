@@ -6,17 +6,11 @@
 
     <!-- навигация -->
     <SbLogo class="logo" :src="logoUrl" />
-    <a class="abs menu" style="left: 1125px" href="https://southhub.ru/" target="_blank">
-      <span>South HUB'2027</span>
-      <span class="nav-arrow" aria-hidden="true"><img class="arrow-hover" src="~/assets/sb/nav-arrow-hover.svg" alt="" /><img class="arrow-active" src="~/assets/sb/nav-arrow-active.svg" alt="" /></span>
-    </a>
-    <a class="abs menu" style="left: 1273px" href="https://t.me/southhub_com" target="_blank">
+    <a class="abs menu" style="left: 1125px" href="https://t.me/southhub_com" target="_blank">
       <span>Задать вопрос</span>
       <span class="nav-arrow" aria-hidden="true"><img class="arrow-hover" src="~/assets/sb/nav-arrow-hover.svg" alt="" /><img class="arrow-active" src="~/assets/sb/nav-arrow-active.svg" alt="" /></span>
     </a>
-    <a class="abs login" href="https://lk.southhub.ru/accounts/login/" target="_blank">
-      <img src="~/assets/sb/user.svg" alt="" width="16" height="20" />Войти
-    </a>
+    <a class="abs base-button login" href="https://lk.southhub.ru/accounts/login/" target="_blank">Войти</a>
     <a class="abs corners tg" href="https://t.me/+Up2b6jqa30xhYzMy?utm_source=SB&utm_medium=landing&utm_campaign=invite" target="_blank" aria-label="Telegram">
       <i /><i /><i /><i />
       <img src="~/assets/sb/tg.svg" alt="" width="22" height="18" />
@@ -97,12 +91,8 @@ useAutoplayWhenVisible(preview)
 .menu:active .arrow-active { opacity: 1; }
 .pill-link { transition: background .2s ease; }
 .pill-link:hover { background: rgba(255,255,255,.75); }
-.login {
-  left: 1700px; top: 30px; height: 50px; display: flex; gap: 10px; align-items: center;
-  padding: 0 20px 0 15px; background: var(--black); color: var(--white); border-radius: 15px; font-size: 16px;
-  transition: opacity .2s;
-}
-.login:hover { opacity: .8; }
+/* «войти» — кнопка со скобками, по центру высоты кнопки Telegram */
+.login { --btn-w: 150px; position: absolute; left: 1660px; top: 41px; color: var(--black); }
 .tg { left: 1830px; top: 30px; width: 50px; height: 50px; }
 
 h1 { font-weight: 400; }
