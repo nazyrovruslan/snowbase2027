@@ -3,7 +3,8 @@ const SITE_URL = 'https://southhub.ru/snowbase/'
 const TITLE = 'Snow BASE 2027 — кэмп для C-level в AI, 25 — 28 февраля 2027'
 const DESCRIPTION =
   'Snow BASE — кэмп для C-level в AI. Четыре дня в горах Архыза: лидеры AI разбирают деньги, технологии, команды и решения, которые пришлось переделать, — всё, что осталось за кадром успешных кейсов.'
-const OG_IMAGE = SITE_URL + 'og.jpg'
+// обложка для превью ссылок; на тестовом GitHub Pages берётся оттуда, т.к. на проде её пока нет
+const OG_IMAGE = (process.env.OG_BASE_URL || SITE_URL) + 'og.jpg'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
