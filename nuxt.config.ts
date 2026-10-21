@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
 
+  // без отдельного _payload.json: данные страницы лежат прямо в index.html (нужно для сборки `npm run static`)
+  experimental: { payloadExtraction: false },
+
   runtimeConfig: {
     public: {
       // как на southhub.ru: Метрика включается только флагом (NUXT_PUBLIC_ENABLE_METRIC=true на проде)

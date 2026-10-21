@@ -80,3 +80,9 @@ docker build --build-arg NUXT_PUBLIC_ENABLE_METRIC=false -t snowbase:nometrika .
 - `components/VideoModal.vue`, `MapModal.vue`, `CookieBanner.vue` — шоурил, карта Архыза, баннер cookies.
 - `plugins/metrika.client.js`, `plugins/utm.client.js` — Метрика и UTM-метки.
 - `assets/fonts` — шрифт Mont (лицензия South HUB).
+
+## Статическая сборка (без Nuxt на сервере)
+
+Готовая сборка лежит в папке `static/` ветки `snowbase-static`: `index.html` (стили встроены в страницу), JS, картинки, шрифты и видео в `_nuxt/`, фавиконки рядом. Все пути относительные, папку можно положить в корень домена или в любую подпапку (например `/snowbase/`), раздавать как обычную статику (nginx и т. п.). Открывать через веб-сервер, а не двойным кликом по файлу: из `file://` браузер не запустит JS.
+
+Пересобрать: `npm ci && npm run static`.
