@@ -16,8 +16,9 @@
 </template>
 
 <script setup>
-// фавиконки лежат в public/, путь учитывает baseURL (например /snowbase2027/ на GitHub Pages)
-const base = useRuntimeConfig().app.baseURL
+// фавиконки лежат в public/, путь учитывает baseURL (например /snowbase2027/ на GitHub Pages);
+// в статической сборке (`npm run static`) папку с файлами задаёт страница через window.__ASSETS__
+const base = (import.meta.client && window.__ASSETS__) || useRuntimeConfig().app.baseURL
 useHead({
   link: [
     { rel: 'icon', href: base + 'favicon.ico', sizes: 'any' },
