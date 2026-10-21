@@ -1,7 +1,7 @@
 # Snow BASE 2027 — лендинг
 
 Лендинг Snow BASE 2027 (макеты «Snow BASE DESC» / «Snow BASE MOB» в Figma, страница «Анонс SB 2027»).
-Стек: Nuxt 3 + Vue 3, без UI-библиотек.
+Стек: Nuxt 4 + Vue 3, без UI-библиотек (тот же, что у анонса South HUB 2027: исходники в `app/`, TypeScript для конфига).
 
 - Прод: **https://southhub.ru/snowbase/** (заменяет текущую страницу Snow BASE)
 - Тест: https://nazyrovruslan.github.io/snowbase2027/ — деплоится автоматически из `main`, не индексируется, без Метрики

@@ -7,7 +7,7 @@ const DESCRIPTION =
 const OG_IMAGE = (process.env.OG_BASE_URL || SITE_URL) + 'og.jpg'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-01-01',
+  compatibilityDate: '2025-09-01',
   devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
 
