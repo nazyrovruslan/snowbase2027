@@ -1,10 +1,7 @@
 node_modules
-.output
-.nuxt
-.data
-.nitro
-.cache
 dist
+export
+dsfc-smoke-out
 .git
 .github
 .env

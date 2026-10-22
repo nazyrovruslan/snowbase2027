@@ -1,0 +1,30 @@
+name: Check
+
+# Проверка каждого PR: типы, сборка vite-ssg и обе проверки контракта DSFC/1 (статическая и в браузере)
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npx -y playwright@1 install --with-deps chromium
+      - run: npm i --no-save playwright@1
+      - run: npm run check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dsfc-smoke-screenshots
+          path: dsfc-smoke-out
