@@ -35,14 +35,14 @@ jobs:
           for i in $(seq 1 20); do curl -fs http://localhost:8080/healthz && break; sleep 1; done
           set -e
           page=$(curl -fs http://localhost:8080/snowbase/)
-          echo "$page" | grep -q '<title>Snow BASE 2027'
+          echo "$page" | grep -qE '<title[^>]*>Snow BASE 2027'
           echo "$page" | grep -q 'mc.yandex.ru/watch/89187152'
           echo "$page" | grep -q 'content="index, follow"'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/snowbase)" = "301"
           curl -fsI http://localhost:8080/snowbase/ | grep -qi 'cache-control: no-cache'
-          asset=$(echo "$page" | grep -oE '/snowbase/_nuxt/[A-Za-z0-9_.-]+\.js' | head -1)
+          asset=$(echo "$page" | grep -oE '/snowbase/assets/[A-Za-z0-9_.-]+\.js' | head -1)
           curl -fsI "http://localhost:8080$asset" | grep -qi 'immutable'
-          curl -fsI http://localhost:8080/snowbase/site.webmanifest | grep -qi 'application/manifest+json'
+          curl -fsI http://localhost:8080/snowbase/public/site.webmanifest | grep -qi 'application/manifest+json'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/snowbase/nope)" = "404"
           echo "smoke test passed"
           docker rm -f sb

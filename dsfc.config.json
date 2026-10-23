@@ -1,0 +1,23 @@
+{
+  "name": "snowbase2027",
+  "title": "Snow BASE 2027 — анонс",
+  "lang": "ru",
+  "seo": {
+    "title": "Snow BASE 2027 — кэмп для C-level в AI, 25 — 28 февраля 2027",
+    "description": "Snow BASE — кэмп для C-level в AI. Четыре дня в горах Архыза: лидеры AI разбирают деньги, технологии, команды и решения, которые пришлось переделать, — всё, что осталось за кадром успешных кейсов.",
+    "ogImage": "public/og.jpg"
+  },
+  "config": {
+    "applyLink": { "type": "url", "label": "Ссылка «Подать заявку»", "default": "https://lk.southhub.ru/" },
+    "loginLink": { "type": "url", "label": "Ссылка «Войти»", "default": "https://lk.southhub.ru/accounts/login/" },
+    "questionLink": { "type": "url", "label": "Ссылка «Задать вопрос»", "default": "https://t.me/southhub_com" },
+    "telegramLink": { "type": "url", "label": "Ссылка на Telegram-чат (кнопка в шапке)", "default": "https://t.me/+Up2b6jqa30xhYzMy?utm_source=SB&utm_medium=landing&utm_campaign=invite" },
+    "datesLabel": { "type": "text", "label": "Даты на плашке", "default": "25–28 февраля, 2027" },
+    "calendarLink": { "type": "url", "label": "Ссылка плашки с датами (Google Календарь)", "default": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Snow+BASE+2027&dates=20270225%2F20270301&location=%D0%93%D0%BE%D1%80%D0%BD%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+45%2C+%D1%81%D0%B5%D0%BB%D0%BE+%D0%90%D1%80%D1%85%D1%8B%D0%B7%2C+%D0%9A%D0%B0%D1%80%D0%B0%D1%87%D0%B0%D0%B5%D0%B2%D0%BE-%D0%A7%D0%B5%D1%80%D0%BA%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0&details=Snow+BASE+%E2%80%94+%D0%BA%D1%8D%D0%BC%D0%BF+%D0%B4%D0%BB%D1%8F+C-level+%D0%B2+AI.+https%3A%2F%2Fsouthhub.ru%2Fsnowbase%2F" },
+    "ticketsEnabled": { "type": "bool", "label": "Показывать блок продажи билетов", "default": false },
+    "ticketsEventId": { "type": "text", "label": "ID события для блока билетов", "default": "" },
+    "ticketsApiUrl": { "type": "url", "label": "Адрес API билетов (того же домена)", "default": "/api/tickets/" }
+  },
+  "requires": { "csrf": false },
+  "externalOrigins": ["https://yandex.ru", "https://calendar.google.com"]
+}

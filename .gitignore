@@ -1,10 +1,7 @@
 node_modules
-.nuxt
-.output
-.data
-.nitro
-.cache
 dist
+export
+dsfc-smoke-out
 .env
 .env.*
 .DS_Store

@@ -1,82 +1,86 @@
 # Snow BASE 2027 — лендинг
 
 Лендинг Snow BASE 2027 (макеты «Snow BASE DESC» / «Snow BASE MOB» в Figma, страница «Анонс SB 2027»).
-Стек: Nuxt 4 + Vue 3, без UI-библиотек (тот же, что у анонса South HUB 2027: исходники в `app/`, TypeScript для конфига).
 
-- Прод: **https://southhub.ru/snowbase/** (заменяет текущую страницу Snow BASE)
+Стек: **Vue 3 + Vite + TypeScript + vite-ssg** (статическая генерация, без Nuxt и без Node.js в проде).
+Сборка соответствует контракту **Django Static Frontend Contract v1 (DSFC/1)** и встраивается в Django/Wagtail как обычный шаблон —
+подробная инструкция для backend: **[docs/DJANGO.md](docs/DJANGO.md)**.
+
+- Прод: **https://southhub.ru/snowbase/**
 - Тест: https://nazyrovruslan.github.io/snowbase2027/ — деплоится автоматически из `main`, не индексируется, без Метрики
 
-## Запуск
+## Команды
 
-Нужен Node.js 20+.
+Нужен Node.js 20+ (только для разработки и сборки).
 
 ```bash
 npm install
-npm run dev
+npm run dev            # http://localhost:5173/__DSFC_BASE__/
+npm run typecheck      # vue-tsc
+npm run build          # vite-ssg build + постобработка → dist/
+npm run check          # проверки DSFC/1: tools/dsfc_check.py (статика) и tools/dsfc_smoke.mjs (браузер, нужен Playwright)
+npm run preview        # готовая сборка на http://localhost:4173/__DSFC_BASE__/
+
+npm run export:django -- --static-url /static/   # dist/ → export/django/ (шаблон + статика для Django)
+npm run export:static -- --base /snowbase/       # dist/ → export/static/ (обычная статика для nginx / GitHub Pages)
 ```
 
-Откроется на http://localhost:3000/snowbase/
+## Что получается после `npm run build`
 
-## Сборка для прода (southhub.ru/snowbase/)
-
-```bash
-NUXT_PUBLIC_ENABLE_METRIC=true npm run generate
+```text
+dist/
+├── index.html            # уже отрендеренная страница (весь текст, заголовки, ссылки — в HTML)
+├── dsfc-manifest.json    # имя, версия, SEO по умолчанию, настройки для CMS, список файлов с sha256
+├── assets/               # JS, CSS, шрифты, картинки, видео — с хешем в имени
+└── public/               # файлы с постоянными именами: og.jpg, фавиконки, site.webmanifest
 ```
 
-Статика окажется в `.output/public` — её нужно отдать по адресу `/snowbase/`.
+- Все локальные адреса начинаются с токена `/__DSFC_BASE__/`; его заменяет на реальный адрес `scripts/export.mjs` (или импортёр на стороне Django).
+- В `index.html` нет `{{`, `{%`, `{#` (постобработка `scripts/dsfc-postbuild.mjs` экранирует их, если появятся в тексте).
+- Маркеры `<!--dsfc:head-->`, `<!--dsfc:body-start-->`, `<!--dsfc:body-end-->` — места для SEO, аналитики и конфигурации из Django.
+- SEO по умолчанию (`title`, description, Open Graph, Twitter, robots, JSON-LD) помечено `data-dsfc="seo"`; JS `<head>` не трогает.
+- Метрики и других счётчиков в сборке нет: их подключает Django (а для статики — `export.mjs --metrika`).
 
-| Переменная | По умолчанию | Что делает |
-|---|---|---|
-| `NUXT_APP_BASE_URL` | `/snowbase/` | адрес страницы (slug) |
-| `NUXT_PUBLIC_ENABLE_METRIC` | `false` | Яндекс Метрика 89187152, как на southhub.ru |
-| `NUXT_PUBLIC_INDEXABLE` | `true` | `robots: index, follow`; `false` → `noindex, nofollow` |
+## Как устроено
 
-## Docker-образ для прода
+```text
+src/
+├── main.ts                       # ViteSSG(App, …, { hydration: true, useHead: false })
+├── App.vue                       # масштаб макетов 1920/390, применение настроек из CMS, UTM
+├── components/
+│   ├── sections/                 # SbHero / MobHero (первый экран), SbPattern / MobPattern (блок с U)
+│   ├── layout/                   # SiteFooter, CookieBanner
+│   ├── modals/                   # VideoModal (шоурил), MapModal (Яндекс Карта)
+│   ├── ui/SbLogo.vue
+│   └── widgets/TicketWidget.vue  # продажа билетов через API Django (выключен по умолчанию)
+├── composables/                  # useSiteConfig (настройки из CMS), useModals, useScrollLock, useUWave, useAutoplayWhenVisible
+├── services/api.ts               # запросы к API Django (только в браузере, только тот же домен)
+├── utils/utm.ts                  # проброс UTM-меток в ссылки на southhub.ru
+├── styles/main.css
+└── assets/                       # шрифт Mont (лицензия South HUB), картинки, видео
+dsfc.config.json                  # имя сборки, SEO по умолчанию, настройки для CMS (config), внешние домены
+```
 
-Образ собирается автоматически в GitHub Actions (`.github/workflows/docker.yml`) при каждом пуше в `main`
-и при теге `v*`, проходит проверку (страница, Метрика, редиректы, кэш, 404) и публикуется в GitHub Container Registry:
+- Десктоп свёрстан в ширину 1920px, мобильная версия — 390px; обе масштабируются под ширину окна через CSS `zoom`.
+  Масштаб зависит от окна, поэтому при SSG он равен 1 и пересчитывается сразу после монтирования (так же было в Nuxt-версии).
+- Всё, что зависит от браузера (масштаб, баннер cookies из `localStorage`, анимации, видео), запускается в `onMounted` — первый рендер одинаков при SSG и гидратации.
+- Ссылки «Подать заявку», «Войти», «Задать вопрос», Telegram, даты и ссылка на Google Календарь — настройки из `dsfc.config.json → config`,
+  редактор может менять их в Wagtail без пересборки.
+
+## Docker-образ (старый способ прода, без Django)
+
+Образ по-прежнему собирается в GitHub Actions (`.github/workflows/docker.yml`) при пуше в `main` и тегах `v*`:
+nginx без root, порт **8080**, страница по пути **`/snowbase/`**, `/healthz`, Метрика 89187152, `robots: index, follow`.
 
 ```bash
 docker pull ghcr.io/nazyrovruslan/snowbase2027:latest
 docker run -d --restart unless-stopped -p 127.0.0.1:8080:8080 ghcr.io/nazyrovruslan/snowbase2027:latest
-```
-
-- внутри: nginx без root, порт **8080**, страница по пути **`/snowbase/`**, проверка здоровья — `GET /healthz`
-- собран с продовыми настройками: Метрика 89187152 включена, `robots: index, follow`
-- теги: `latest` (последний `main`), `sha-<коммит>`, `v1.0.0` (для релизных тегов)
-- пример запуска — `docker-compose.yml`
-
-Основной nginx southhub.ru должен проксировать `/snowbase/` в контейнер без изменения пути:
-
-```nginx
-location /snowbase/ {
-    proxy_pass http://127.0.0.1:8080;
-    proxy_set_header Host $host;
-}
-```
-
-Собрать образ вручную (с другими настройками — через `--build-arg`):
-
-```bash
-docker build -t snowbase .
-docker build --build-arg NUXT_PUBLIC_ENABLE_METRIC=false -t snowbase:nometrika .
+docker build --build-arg METRIKA_ID= --build-arg INDEXABLE=false -t snowbase:test .   # без Метрики, noindex
 ```
 
 ## Что перенесено с southhub.ru
 
-- slug `/snowbase/`, canonical `https://southhub.ru/snowbase/`, `og:site_name` Southuuub
-- SEO: title, description, Open Graph (+ картинка `public/og.jpg` 1200×630), Twitter Card, robots, JSON-LD (Organization, WebSite, WebPage, Event)
-- Яндекс Метрика 89187152: webvisor, clickmap, trackLinks, accurateTrackBounce, ecommerce `dataLayer` + noscript-пиксель.
-  Модули `tag_ec`, `tag_phono` и пиксель programmatic.ru Метрика подгружает сама.
+- slug `/snowbase/`, SEO (title, description, Open Graph с картинкой `public/og.jpg` 1200×630, Twitter Card, robots, JSON-LD Organization + Event)
 - проброс UTM-меток (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`) в ссылки на southhub.ru
 - баннер cookies; согласие хранится в `localStorage` под ключом `isVisibleCookieAlert`, общим с southhub.ru
-
-## Как устроено
-
-- Десктоп свёрстан в ширину 1920px, мобильная версия — 390px; обе масштабируются под ширину окна через CSS `zoom` (`app.vue`).
-- `components/SbHero.vue`, `MobHero.vue` — первый экран; при наведении на «Подать заявку» (на мобилке — после 30% прокрутки) фото меняется на закат.
-- `components/SbPattern.vue`, `MobPattern.vue` + `composables/useUWave.js` — блок с буквами U, анимация как на southhub.ru.
-- `components/SbFooter.vue`, `MobFooter.vue` — блок median.agency и футер с southhub.ru.
-- `components/VideoModal.vue`, `MapModal.vue`, `CookieBanner.vue` — шоурил, карта Архыза, баннер cookies.
-- `plugins/metrika.client.js`, `plugins/utm.client.js` — Метрика и UTM-метки.
-- `assets/fonts` — шрифт Mont (лицензия South HUB).
+- Яндекс Метрика 89187152 — теперь подключается не из сборки, а на стороне Django (см. docs/DJANGO.md) или флагом `--metrika` при экспорте в статику
